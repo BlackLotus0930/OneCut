@@ -1,165 +1,108 @@
-![OneCut](OneCut.gif)
+![OneCut Demo](OneCut.gif)
 
 # OneCut
 
-OneCut is an AI-powered web-based video editor that transforms long-form content into engaging highlights. Built for professionals, educators, and content creators who need to quickly turn hours of footage into shareable videos without the complexity of traditional editing software.
+OneCut is an AI-powered, browser-based video editor built to transform long-form recordings into high-impact highlights. It combines intelligent clip detection, a professional timeline editor, and scalable export workflows so creators can publish faster without sacrificing quality.
 
-## Overview
+## Why OneCut
 
-OneCut combines advanced AI analysis with an intuitive editing interface to automate the most time-consuming parts of video production. Upload your long recordings, let AI identify the best moments, and refine the results with professional editing tools—all in your browser.
+- Reduce hours of manual editing with AI-assisted highlight generation.
+- Keep full creative control with a multi-track timeline and precision tools.
+- Produce platform-ready videos for YouTube, TikTok, Instagram, and more.
+- Run a modern full-stack architecture designed for real-time media workflows.
 
-![OneCut Video Editor Interface](editor-screenshot.png)
+## Core Features
 
-The OneCut interface features a clean, modern design with a central video preview, comprehensive tool panels for editing, a multi-track timeline, and integrated export options optimized for social media platforms.
+### AI Editing Engine
+- Smart highlight detection for interviews, tutorials, podcasts, and similar formats.
+- Configurable prompt-based instructions for tailored output.
+- Short-form and long-form clip generation modes.
+- Scene-aware analysis pipeline for better content segmentation.
 
-## Key Features
+### Professional Web Editor
+- Multi-track timeline with drag-and-drop interactions.
+- Frame-level trimming and clip splitting.
+- Playback speed controls and aspect-ratio presets (`16:9`, `9:16`, `1:1`).
+- Text, stickers, transitions, and visual effects.
 
-### AI-Powered Smart Cut
-- Automatically analyzes video content to identify engaging moments
-- Supports multiple content types: podcasts, interviews, tutorials, gaming, and more
-- Generates highlights optimized for short-form (20s-2min) or long-form (2-30min) content
-- Customizable AI instructions for targeted editing
+### Captions, Audio, and Voice
+- Automatic caption generation with timing synchronization.
+- Caption style presets for different publishing formats.
+- AI voiceover support and music layering.
+- Audio cleanup and volume balancing workflows.
 
-### Professional Video Editor
-- Multi-track timeline with drag-and-drop editing
-- Precise clip trimming and splitting
-- Speed adjustment (0.5x to 3x playback speed)
-- Aspect ratio support (16:9, 9:16, 1:1)
+### Export and Delivery
+- Hybrid rendering pipeline with FFmpeg and browser rendering.
+- Progress-tracked export jobs with real-time updates.
+- Optimized output profiles for major social/video platforms.
 
-### Captions & Text
-- Automatic caption generation with multilingual support
-- Multiple caption styles: default, short-form, professional, minimal
-- Customizable text overlays with fonts, colors, and positioning
-- Millisecond-precise timing synchronization
+## Product Workflow
 
-### Audio Tools
-- AI voiceover generation with multiple voice options
-- Background music library with genre and mood filters
-- Volume adjustment and audio enhancement
-- Noise reduction capabilities
+1. **Upload** source footage to your project.
+2. **Analyze** content with AI to generate initial highlight candidates.
+3. **Edit** in the timeline (captions, cuts, transitions, overlays, audio).
+4. **Export** a final render in your preferred platform format.
 
-### Visual Effects
-- Professional transitions: fade, slide, zoom, wipe, dissolve
-- Animated stickers and GIFs
-- Text animations and styling
-- Visual filters and effects
+## Tech Stack
 
-### Export & Sharing
-- High-quality video export in multiple resolutions
-- Platform-optimized formats for YouTube, TikTok, Instagram
-- Hybrid rendering system combining FFmpeg and browser-based rendering
-- Fast export processing with progress tracking
+### Frontend (`client`)
+- `Next.js 15`
+- `React 18`
+- `Tailwind CSS 4`
+- `FFmpeg.wasm`
+- `Socket.IO Client`
 
-## How It Works
+### Backend (`server`)
+- `Node.js` + `Express`
+- `TypeScript`
+- `Supabase` (Auth + PostgreSQL)
+- `Google Cloud Storage`
+- `Google Vertex AI` / `Google GenAI`
+- `FFmpeg` + `Puppeteer` (hybrid export)
 
-1. **Upload**: Drag and drop your video file (supports MP4, MOV, AVI, and more)
-2. **AI Analysis**: Our AI analyzes your content, identifies key moments, and generates highlights
-3. **Edit**: Refine your video with the professional editor—add captions, text, transitions, and more
-4. **Export**: Download your finished video optimized for your target platform
+## Repository Structure
 
-## Technology Stack
-
-### Frontend
-- **Framework**: Next.js 15 with React 18
-- **Styling**: Tailwind CSS 4
-- **State Management**: React Context API
-- **Video Processing**: FFmpeg.wasm for client-side operations
-- **Real-time**: Socket.io for live updates
-
-### Backend
-- **Runtime**: Node.js with Express
-- **Language**: TypeScript
-- **AI Integration**: Google Vertex AI, Google GenAI
-- **Video Processing**: FFmpeg, Puppeteer for hybrid rendering
-- **Storage**: Google Cloud Storage
-- **Database**: Supabase (PostgreSQL)
-- **Authentication**: Supabase Auth
-
-### Infrastructure
-- **Deployment**: Render.com
-- **File Storage**: Google Cloud Storage
-- **Video Transcoding**: Google Cloud Video Transcoder API
-- **Voice Synthesis**: ElevenLabs API
-
-## Project Structure
-
-```
+```text
 OneCut/
-├── client/                 # Next.js frontend application
-│   ├── src/
-│   │   ├── app/           # Next.js app router pages
-│   │   ├── components/    # React components
-│   │   │   ├── editor/   # Video editor components
-│   │   │   ├── home/     # Landing page components
-│   │   │   └── ui/       # Reusable UI components
-│   │   ├── contexts/     # React context providers
-│   │   ├── hooks/        # Custom React hooks
-│   │   ├── lib/          # Utility functions and config
-│   │   ├── services/     # API and business logic
-│   │   └── types/        # TypeScript type definitions
-│   └── public/           # Static assets
-│
-├── server/                # Express backend API
-│   ├── src/
-│   │   ├── api/         # API route handlers
-│   │   ├── integrations/ # Third-party service integrations
-│   │   ├── services/    # Business logic services
-│   │   ├── middleware/  # Express middleware
-│   │   └── types/       # TypeScript type definitions
-│   └── test-hybrid-export.js
-│
-└── _db/                  # Database schema and migrations
+├── client/                 # Next.js app (UI/editor)
+├── server/                 # Express API + media/AI processing
+├── _db/                    # SQL schema and migrations
+├── render.yaml             # Deployment config
+└── README.md
 ```
 
 ## Getting Started
 
 ### Prerequisites
 
-- Node.js 18+ and npm
-- Supabase account and project
-- Google Cloud Platform account with:
-  - Cloud Storage bucket
-  - Vertex AI API enabled
-  - Video Transcoder API enabled
-- ElevenLabs API key (for voiceover features)
+- Node.js `18+`
+- npm
+- Supabase project
+- Google Cloud project with required APIs (Storage, Vertex AI, Video Transcoder)
+- ElevenLabs API key (if using voiceover features)
 
-### Installation
+### 1) Clone and install
 
-1. Clone the repository:
 ```bash
-git clone <repository-url>
+git clone <your-repo-url>
 cd OneCut
-```
-
-2. Install root dependencies:
-```bash
 npm install
+cd client && npm install
+cd ../server && npm install
 ```
 
-3. Install client dependencies:
-```bash
-cd client
-npm install
-```
+### 2) Configure environment variables
 
-4. Install server dependencies:
-```bash
-cd ../server
-npm install
-```
+Create `client/.env.local`:
 
-### Environment Setup
-
-Create environment files for both client and server:
-
-**client/.env.local:**
 ```env
 NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
 NEXT_PUBLIC_API_URL=http://localhost:3001
 ```
 
-**server/.env:**
+Create `server/.env`:
+
 ```env
 SUPABASE_URL=your_supabase_url
 SUPABASE_SERVICE_KEY=your_supabase_service_key
@@ -167,104 +110,66 @@ GOOGLE_CLOUD_STORAGE_BUCKET=your_bucket_name
 GOOGLE_APPLICATION_CREDENTIALS=path/to/service-account.json
 VERTEX_AI_PROJECT_ID=your_project_id
 VERTEX_AI_LOCATION=us-central1
-ELEVENLABS_API_KEY=your_elevenlabs_key
+ELEVENLABS_API_KEY=your_elevenlabs_api_key
 PORT=3001
 ```
 
-### Database Setup
+### 3) Apply database schema
 
-Run the database migrations in the `_db/` directory to set up your schema:
+Run SQL files inside `_db/` against your Supabase/PostgreSQL instance (for example: `users.sql`, `projects.sql`, `assets.sql`, `clips.sql`, `tracks.sql`, etc.).
 
-```bash
-# Connect to your Supabase database and run migrations
-psql -h your-db-host -U postgres -d postgres -f _db/users.sql
-psql -h your-db-host -U postgres -d postgres -f _db/projects.sql
-# ... (run other migration files as needed)
-```
+### 4) Start development servers
 
-### Running the Application
+Backend:
 
-1. Start the backend server:
 ```bash
 cd server
 npm run dev
 ```
 
-2. Start the frontend development server:
+Frontend (new terminal):
+
 ```bash
 cd client
 npm run dev
 ```
 
-3. Open [http://localhost:3000](http://localhost:3000) in your browser
+Open [http://localhost:3000](http://localhost:3000).
 
-## Architecture Highlights
+## API Overview
 
-### Hybrid Export System
+All protected endpoints require a Supabase JWT:
 
-OneCut uses a hybrid rendering approach that combines FFmpeg for media processing with Puppeteer for HTML/CSS rendering. This ensures:
-
-- Perfect fidelity between editor preview and final export
-- Efficient processing of complex visual elements
-- Support for advanced text styling and animations
-- Scalable export processing
-
-### AI Processing Pipeline
-
-1. **Video Analysis**: Semantic analysis creates a structured JSON representation of video content
-2. **Scene Detection**: Identifies key moments, transitions, and highlights
-3. **Transcription**: Multilingual speech-to-text with precise timing
-4. **Smart Cutting**: AI-powered clip generation based on content type and user preferences
-
-### Real-time Updates
-
-WebSocket connections provide live progress updates for:
-- Video processing jobs
-- Export rendering
-- AI analysis progress
-
-## API Documentation
-
-### Authentication
-
-All API endpoints require authentication via Supabase JWT tokens in the Authorization header:
-```
+```http
 Authorization: Bearer <access_token>
 ```
 
-### Key Endpoints
+Representative endpoints:
 
-- `POST /api/projects` - Create a new project
-- `POST /api/assets/upload-to-gcs` - Upload video file
-- `POST /api/quickclips/start` - Start AI highlight generation
-- `GET /api/timeline/:projectId` - Get project timeline
-- `POST /api/export/start` - Start video export
-- `GET /api/export/status/:jobId` - Check export status
+- `POST /api/projects` - create project
+- `POST /api/assets/upload-to-gcs` - upload source media
+- `POST /api/quickclips/start` - trigger AI clip generation
+- `GET /api/timeline/:projectId` - fetch timeline data
+- `POST /api/export/start` - start export
+- `GET /api/export/status/:jobId` - export progress/status
+
+## Architecture Notes
+
+- **Hybrid render system**: FFmpeg handles media operations while browser rendering preserves rich visual fidelity.
+- **Real-time job updates**: Socket-based status updates for processing and export stages.
+- **AI pipeline**: Analysis, transcription, scene understanding, and clip proposal generation.
 
 ## Development
 
-### Code Style
+Client build:
 
-- TypeScript for type safety
-- ESLint for code quality
-- Prettier for code formatting
-
-### Testing
-
-Run tests with:
-```bash
-npm test
-```
-
-### Building for Production
-
-Build the client:
 ```bash
 cd client
 npm run build
 ```
 
-Build the server:
+Server build:
+
 ```bash
 cd server
 npm run build
@@ -272,30 +177,25 @@ npm run build
 
 ## Contributing
 
-We welcome contributions! Please follow these guidelines:
+Contributions are welcome. Recommended flow:
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+1. Fork the repository.
+2. Create a feature branch.
+3. Implement and test your changes.
+4. Open a pull request with a clear description and test notes.
+
+## Security
+
+Do not commit secrets, service-account files, or production API keys. Use local environment files and your deployment secret manager.
 
 ## License
 
-[Specify your license here]
+Add your project license here (for example, MIT, Apache-2.0, or proprietary/internal use).
 
 ## Support
 
-For support, email [your-email] or open an issue in the repository.
-
-## Roadmap
-
-- [ ] Enhanced AI editing suggestions
-- [ ] Collaborative editing features
-- [ ] Mobile app support
-- [ ] Advanced color grading
-- [ ] Plugin system for custom effects
+For bug reports and feature requests, open a GitHub issue with reproduction steps and environment details.
 
 ---
 
-Built with modern web technologies to make professional video editing accessible to everyone.
+OneCut is built to make professional, AI-assisted editing faster, more accessible, and production-ready.
